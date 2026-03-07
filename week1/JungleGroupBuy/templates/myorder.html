@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block title %}나의 주문{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto mt-10 space-y-12">
+    <h1 class="text-2xl font-bold mb-8 text-gray-800 flex justify-center">내가 참여한 주문</h1>
+
+    
+    
+    <div class="space-y-6">
+        <!-- 💡 app.py에서 보낸 'items'를 반복합니다 -->
+        {% for item in items %}
+        <a href="/group-buy/{{ item._id }}" class="block transform transition duration-200 hover:scale-[1.01]">
+            
+            <div class="relative bg-[#F8F9FA] border border-gray-300 rounded-[20px] h-[80px] overflow-hidden flex items-center shadow-sm hover:shadow-md transition">
+                
+                <!-- 🌊 파란색 진행률 배경 바 -->
+                {% set progress = (item.currentAmount / item.targetAmount * 100) if item.targetAmount > 0 else 0 %}
+                <div class="absolute top-0 left-0 h-full bg-[#7EC0EE] opacity-50 transition-all duration-700" 
+                     style="width: {{ progress if progress <= 100 else 100 }}%;"></div>
+                
+                <!-- 텍스트 컨텐츠 (z-10으로 바 위로 올림) -->
+                <div class="relative z-10 w-full flex justify-between items-center px-8">
+                    <div class="flex flex-col">
+                        <!-- 공구 제목 -->
+                        <h3 class="text-gray-900 font-bold text-lg leading-tight">{{ item.title }}</h3>
+                        <!-- 달성 금액 -->
+                        <span class="text-gray-600 font-medium text-sm mt-1">
+                            달성: {{ "{:,}".format(item.currentAmount) }} / {{ "{:,}".format(item.targetAmount) }}원
+                        </span>
+                    </div>
+                    
+                    <div class="flex items-center gap-10">
+                        <!-- 마감일 -->
+                        <span class="text-gray-700 font-medium">
+                            마감: {{ item.deadline }}
+                        </span>
+                        
+                        <!-- 상태 버튼 -->
+                        {% if item.status == 'open' %}
+                            <button class="bg-[#EAEAEA] border border-gray-400 px-6 py-1.5 rounded-xl text-gray-700 font-bold">모집중</button>
+                        {% else %}
+                            <button class="bg-gray-400 border border-gray-500 px-6 py-1.5 rounded-xl text-white font-bold">마감</button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+
+        <!-- 💡 만약 참여한 주문이 하나도 없을 때 -->
+        {% if not items %}
+        <div class="text-center py-20 text-gray-400 bg-gray-50 rounded-[20px] border border-dashed">
+            참여 중인 주문이 없습니다. 🛒
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

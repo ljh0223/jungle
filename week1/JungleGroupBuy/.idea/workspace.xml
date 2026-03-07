@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a24f15c2-baf0-4068-a146-240de3a285bd" name="변경" comment="feat: productInfo 인덱스 추가">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Flask Main" />
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform)); sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo, NoAppException&#10;for module in [&quot;main.py&quot;, &quot;wsgi.py&quot;, &quot;app.py&quot;]:&#10;    try: locals().update(ScriptInfo(app_import_path=module, create_app=None).load_app().make_shell_context()); print(&quot;\nFlask App: %s&quot; % app.import_name); break&#10;    except NoAppException: pass">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform)); sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo, NoAppException&#10;for module in [&quot;main.py&quot;, &quot;wsgi.py&quot;, &quot;app.py&quot;]:&#10;    try: locals().update(ScriptInfo(app_import_path=module, create_app=None).load_app().make_shell_context()); print(&quot;\nFlask App: %s&quot; % app.import_name); break&#10;    except NoAppException: pass" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;SISUinSea&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/SISUinSea/JungleGroupBuy.git&quot;,
+    &quot;accountId&quot;: &quot;6bb01841-963c-4f8e-853f-c73a9b0dc9c7&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="3ATcm2kCyn4OPsF1UWFA8rEyx02" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Flask 서버.JungleGroupBuy.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="JungleGroupBuy" type="Python.FlaskServer">
+      <module name="JungleGroupBuy" />
+      <option name="target" value="$PROJECT_DIR$/app.py" />
+      <option name="targetType" value="PATH" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-PY-251.26927.74" />
+        <option value="bundled-python-sdk-657d8234b839-64d779b69b7a-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.26927.74" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="a24f15c2-baf0-4068-a146-240de3a285bd" name="변경" comment="" />
+      <created>1772620155254</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1772620155254</updated>
+      <workItem from="1772620156279" duration="260000" />
+      <workItem from="1772620435388" duration="621000" />
+      <workItem from="1772621071122" duration="5373000" />
+      <workItem from="1772675786446" duration="3392000" />
+      <workItem from="1772683284088" duration="38000" />
+      <workItem from="1772683344094" duration="5832000" />
+      <workItem from="1772690662935" duration="593000" />
+      <workItem from="1772705438408" duration="2794000" />
+      <workItem from="1772714620381" duration="3072000" />
+      <workItem from="1772757568994" duration="10224000" />
+    </task>
+    <task id="LOCAL-00001" summary="inital commit">
+      <option name="closed" value="true" />
+      <created>1772620355324</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1772620355324</updated>
+    </task>
+    <task id="LOCAL-00002" summary="DB 연결">
+      <option name="closed" value="true" />
+      <created>1772623600462</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1772623600462</updated>
+    </task>
+    <task id="LOCAL-00003" summary="main.js도 개발 구역 나누기">
+      <option name="closed" value="true" />
+      <created>1772624962033</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1772624962033</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: 내 공동주문, 내가 참여중인 주문 뱃지로 표시">
+      <option name="closed" value="true" />
+      <created>1772674924766</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1772674924766</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: 충돌 수동으로 해결&#10;- 이전 Dummy Data(test user 연결) 원상복구&#10;- Git merge 상에서 발생한 충돌 메시지 아예 삭제함(영역 3)">
+      <option name="closed" value="true" />
+      <created>1772679570652</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1772679570652</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: url 입력 시 자동으로 상품명, 가격 가져오는 기능 구현">
+      <option name="closed" value="true" />
+      <created>1772690247668</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1772690247668</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: url 입력 시 자동으로 상품명, 가격 가져오는 기능 구현">
+      <option name="closed" value="true" />
+      <created>1772691406047</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1772691406047</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: url-상품 정보 DB cache에 유효기간 적용">
+      <option name="closed" value="true" />
+      <created>1772691502621</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1772691502621</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: 내가 작성한 공동주문 뱃지 groupBuyList 페이지에서 표시하도록 원상복귀&#10;- is_author, is_participant 변수 template에 넘겨줌">
+      <option name="closed" value="true" />
+      <created>1772693478460</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1772693478460</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: 다이소 상품이 DB에 없을 때 발생하는 오류 원인 로직 수정">
+      <option name="closed" value="true" />
+      <created>1772695357679</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1772695357679</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat: 공동구매의 주문 삭제 기능 추가">
+      <option name="closed" value="true" />
+      <created>1772701090337</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1772701090337</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: 주문 삭제 조건 변경">
+      <option name="closed" value="true" />
+      <created>1772713944704</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1772713944704</updated>
+    </task>
+    <task id="LOCAL-00013" summary="style: 공동구매번호 스타일 변경">
+      <option name="closed" value="true" />
+      <created>1772727656383</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1772727656383</updated>
+    </task>
+    <task id="LOCAL-00014" summary="style: 서비스 이름 변경 정탐공 &gt; 다모여라">
+      <option name="closed" value="true" />
+      <created>1772760654354</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1772760654354</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat: 로그인 안 된 상태에서 홈화면 접근 차단 로직 추가">
+      <option name="closed" value="true" />
+      <created>1772764215534</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1772764215534</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: 로그인 안 된 상태에서 홈화면 접근 차단 로직 추가">
+      <option name="closed" value="true" />
+      <created>1772764598881</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1772764598881</updated>
+    </task>
+    <task id="LOCAL-00017" summary="feat: productInfo 인덱스 추가">
+      <option name="closed" value="true" />
+      <created>1772769516651</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1772769516651</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="inital commit" />
+    <MESSAGE value="DB 연결" />
+    <MESSAGE value="main.js도 개발 구역 나누기" />
+    <MESSAGE value="feat: 충돌 수동으로 해결&#10;- 이전 Dummy Data(test user 연결) 원상복구&#10;- Git merge 상에서 발생한 충돌 메시지 아예 삭제함(영역 3)" />
+    <MESSAGE value="feat: url 입력 시 자동으로 상품명, 가격 가져오는 기능 구현" />
+    <MESSAGE value="feat: url-상품 정보 DB cache에 유효기간 적용" />
+    <MESSAGE value="feat: 내가 작성한 공동주문 뱃지 groupBuyList 페이지에서 표시하도록 원상복귀&#10;- is_author, is_participant 변수 template에 넘겨줌" />
+    <MESSAGE value="feat: 다이소 상품이 DB에 없을 때 발생하는 오류 원인 로직 수정" />
+    <MESSAGE value="feat: 공동구매의 주문 삭제 기능 추가" />
+    <MESSAGE value="feat: 주문 삭제 조건 변경" />
+    <MESSAGE value="style: 공동구매번호 스타일 변경" />
+    <MESSAGE value="style: 서비스 이름 변경 정탐공 &gt; 다모여라" />
+    <MESSAGE value="feat: 로그인 안 된 상태에서 홈화면 접근 차단 로직 추가" />
+    <MESSAGE value="feat: productInfo 인덱스 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: productInfo 인덱스 추가" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/JungleGroupBuy$JungleGroupBuy.coverage" NAME="JungleGroupBuy 커버리지 결과" MODIFIED="1772623547147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+  </component>
+</project>
