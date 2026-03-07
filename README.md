@@ -21,7 +21,7 @@
 ### [Week 02-05] - 핵심 프로젝트 (Current)
 - **Topic:** SW-AI 템플릿 기반 프로젝트
 - **Tech Stack:** Python, C, Git
-- **Project Folder:** `SW-AI-W02-05-TEMPLATE`
+- **Project Folder:** `week2`
 
 ---
 
