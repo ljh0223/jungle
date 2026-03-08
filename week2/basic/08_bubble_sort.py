@@ -70,7 +70,7 @@ def bubble_sort_optimized(arr):
             if arr[j]>arr[j+1]:
                 arr[j],arr[j+1]=arr[j+1],arr[j]
                 swapped = True
-        if swapped == False:
+        if swapped == False: #위치가 중요함
             return arr
             
 
