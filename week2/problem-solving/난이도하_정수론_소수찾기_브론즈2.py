@@ -18,3 +18,4 @@ def sol():
                 prime.append(i)
 
     return len(prime)
+print(sol())
