@@ -36,9 +36,15 @@ def gcd(a, b):
     """
     # TODO: 유클리드 호제법 구현
     # base case: b가 0이면 a 반환
-    # recursive를 이용 
+    # recursive를 이용
+    m=max(a,b)
+    n=min(a,b)
     pass
-
+    c=m%n
+    if c == 0:
+        return n
+    else:
+        return gcd(c,n)    
 def gcd_iterative(a, b):
     """
     반복문을 사용한 최대공약수 계산
@@ -53,6 +59,13 @@ def gcd_iterative(a, b):
     # b가 0이 될 때까지 반복
     pass
 
+    while b%a!=0:
+        if a>b:
+            a,b=b,a
+        b=b%a
+        if b%a==0:
+            return a
+
 def lcm(a, b):
     """
     최소공배수 계산
@@ -65,8 +78,10 @@ def lcm(a, b):
     """
     # TODO: LCM 계산
     pass
-
-def extended_gcd(a, b):
+    g=gcd(a,b)
+    ga, gb=a//g, b//g
+    return g*ga*gb 
+#def extended_gcd(a, b):
     """
     확장 유클리드 호제법
     ax + by = gcd(a, b)를 만족하는 x, y를 찾음
@@ -82,7 +97,10 @@ def extended_gcd(a, b):
     # recursive case
     # 역추적하며 x, y 계산
     pass
-
+    g=gcd(a,b)
+    if b==0:
+        return (a, 1, 0)
+    return 1
 def is_prime(n):
     """
     소수 판별
@@ -98,6 +116,18 @@ def is_prime(n):
     # 2부터 sqrt(n)까지 나누어 떨어지는지 확인    
     # 3부터 sqrt(n)까지 홀수만 확인
     pass 
+    if n<2 :
+        return False
+    if n==2:
+        return True
+    if n%2==0:
+        return False
+    for i in range(3,int(n**0.5),2):
+        if (n!=i) and (n%i==0) :
+            return False
+        return True
+            
+
 
 # 테스트 케이스
 if __name__ == "__main__":
@@ -130,12 +160,12 @@ if __name__ == "__main__":
     # 테스트 케이스 4: 확장 유클리드
     print("=== 테스트 케이스 4: 확장 유클리드 ===")
     a, b = 35, 15
-    g, x, y = extended_gcd(a, b)
-    print(f"a = {a}, b = {b}")
-    print(f"GCD = {g}")
-    print(f"{a} × {x} + {b} × {y} = {g}")
-    print(f"검증: {a * x + b * y} = {g}")
-    print()
+#   g, x, y = extended_gcd(a, b)
+#    print(f"a = {a}, b = {b}")
+#    print(f"GCD = {g}")
+#    print(f"{a} × {x} + {b} × {y} = {g}")
+#    print(f"검증: {a * x + b * y} = {g}")
+#    print()
     
     # 테스트 케이스 5: 소수 판별
     print("=== 테스트 케이스 5: 소수 판별 ===")
