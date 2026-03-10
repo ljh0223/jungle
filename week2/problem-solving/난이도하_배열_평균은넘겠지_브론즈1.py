@@ -7,14 +7,14 @@ import sys
 sys.stdin = open("4344.txt", "r")
 
 def solve():
-    c = int(sys.stdin.readline()) #테스트 케이스 개수
+    c = int(sys.stdin.readline())
     avg_list=[]
     n_list=[]
     for _ in range(c):
         data = list(map(int, sys.stdin.readline().split()))
         n = data[0]
-        n_list.append(n)         # 학생 수
-        scores = data[1:]   # 점수 리스트
+        n_list.append(n)
+        scores = data[1:]
         avg=sum(scores)/n
         avg_list.append(avg)
         count=0
