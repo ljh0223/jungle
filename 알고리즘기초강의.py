@@ -45,7 +45,8 @@ def fast_exp(b,n):
             return (b**(n/2))**2
         if n is odd:
             return b*fast_exp(b,n-1)
-        
+
+#피보나치를 구현하면 같은 값이 반복되어 복잡도가 올라감. tree구조.        
 def fin(n):
     if n==0:
         return 0
@@ -54,4 +55,5 @@ def fin(n):
     if n>1 :
         return fin(n-2)+fin(n-1)
 
-print(fin(5))    
+# 재귀는 큰 문제를 작은 문제로 나누고, 그 작은 문제가 자기 자신과 구조가 동일할 때 적용할 수 있는 방법
+
