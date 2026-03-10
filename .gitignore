@@ -24,3 +24,7 @@ config.json
 
 # 로그
 *.log
+
+# Local Codex instructions
+AGENTS.md
+
