@@ -40,12 +40,11 @@ def find_max_divide_conquer(arr, left, right):
     # TODO: 중간 지점 계산
     mid=(left+right)//2
     # TODO: 왼쪽 절반의 최댓값
-    find_max_divide_conquer(arr, left,mid)
+    left_max=find_max_divide_conquer(arr, left,mid)
     # TODO: 오른쪽 절반의 최댓값
-    find_max_divide_conquer(arr,mid+1,right)
-    maximum=max(find_max_divide_conquer(arr,left,mid),find_max_divide_conquer(arr,mid+1,right))
+    right_max=find_max_divide_conquer(arr,mid+1,right)    
     # TODO: 둘 중 큰 값 반환
-    return maximum
+    return max(left_max,right_max)
 # 테스트 케이스
 if __name__ == "__main__":
     # 테스트 케이스 1
