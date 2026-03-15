@@ -2,6 +2,8 @@
 # 문제 링크: https://www.acmicpc.net/problem/9933
 N=int(input())
 
+N=int(input())
+
 def sol():
     pw_list=[]
     result=[]
@@ -19,10 +21,9 @@ def sol():
 def sol2():
     pw_set=set()
     for _ in range(N):
-        pw_set.add(input())
-    for pw in pw_set:
-        if pw[::-1] in pw_set:
-            print(len(pw), pw[(len(pw))//2])
-            break
-
+        pw=input()
+        if (pw[::-1] in pw_set) or pw==pw[::-1]:
+            print(len(pw), pw[len(pw)//2])
+        else:
+            pw_set.add(pw)
 sol2()
