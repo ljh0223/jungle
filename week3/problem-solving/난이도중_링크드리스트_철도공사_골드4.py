@@ -1,88 +1,97 @@
-# 링크드리스트 - 철도 공사 (백준 골드4)
-# 문제 링크: https://www.acmicpc.net/problem/23309
-import sys
-input = sys.stdin.readline
+class Node: 
+    def __init__(self,data,next=None,prev=None):
+        self.data=data
+        self.next=next
+        self.prev=prev
+    
+class Linkedlist:
+    def __init__(self):
+        self.head=None
+        self.current=None
 
+    def append_node(self,data):
+        if self.head is None:
+            self.head=Node(data)
+            self.current=self.head
+        else:
+            new_node=Node(data)
+            self.current.next=new_node
+            new_node.prev=self.current
+            self.current=self.current.next
 
-class Node:
-    def __init__(self, value):
-        self.value = value
-        self.prev = None
-        self.next = None
+    def last_to_head(self):
+        self.current.next=self.head
+        self.head.prev=self.current
 
+    def bn(self,curr_station,new_station):
+        current_1=self.head
+        while current_1.data!=curr_station:
+            current_1=current_1.next
+        current_2=current_1.next
+        print(current_2.data)
 
-n, m = map(int, input().split())
-nums = list(map(int, input().split()))
+        new_node=Node(new_station)
+        current_1.next=new_node
+        new_node.prev=current_1
+        new_node.next=current_2
+        current_2.prev=new_node
 
-nodes = {}
+    def bp(self,curr_station,new_station):
+        current_1=self.head
+        while current_1.data!=curr_station:
+            current_1=current_1.next
+        current_2=current_1.prev
+        print(current_2.data)
 
-first = None
-prev_node = None
+        new_node=Node(new_station)
+        current_1.prev=new_node
+        new_node.next=current_1
+        new_node.prev=current_2
+        current_2.next=new_node
 
-for num in nums:
-    new_node = Node(num)
-    nodes[num] = new_node
+    def cn(self,curr_station):
+        current_1=self.head
+        while current_1.data!=curr_station:
+            current_1=current_1.next
+        current_2=current_1.next
+        print(current_2.data)
+        current_3=current_2.next
+        current_1.next=current_3
+        current_3.prev=current_1
+        current_2.next=None
+        current_2.prev=None
 
-    if first is None:
-        first = new_node
-    else:
-        prev_node.next = new_node
-        new_node.prev = prev_node
+    def cp(self,curr_station):
+        current_1=self.head
+        while current_1.data!=curr_station:
+            current_1=current_1.next
+        current_2=current_1.prev
+        print(current_2.data)
+        current_3=current_2.prev
+        current_1.prev=current_3
+        current_3.next=current_1
+        current_2.next=None
+        current_2.prev=None
+    
+li = Linkedlist()
+a,b = map(int,input().split())
+station_num=list(map(int,input().split()))
 
-    prev_node = new_node
+for i in range(len(station_num)):
+    li.append_node(station_num[i])
+li.last_to_head()
 
-prev_node.next = first
-first.prev = prev_node
+for _ in range(b):
+    command=list(input().stip())
+    cmd=command[0]
+    curr_station=int(command[1])
+    new_station=int(command[2])
+    if cmd=="BN":
+        li.bn(curr_station,new_station)
+    elif cmd=="BP":
+        li.bp(curr_station,new_station)
+    elif cmd=="CN":
+        li.cn(curr_station)
+    elif cmd=="CP":
+        li.cp(curr_station)
 
-answer = []
-
-for _ in range(m):
-    command = input().split()
-    cmd = command[0]
-    i = int(command[1])
-
-    target = nodes[i]
-
-    if cmd == 'BN':
-        j = int(command[2])
-        next_node = target.next
-        answer.append(str(next_node.value))
-
-        new_node = Node(j)
-        nodes[j] = new_node
-
-        target.next = new_node
-        new_node.prev = target
-        new_node.next = next_node
-        next_node.prev = new_node
-
-    elif cmd == 'BP':
-        j = int(command[2])
-        prev_station = target.prev
-        answer.append(str(prev_station.value))
-
-        new_node = Node(j)
-        nodes[j] = new_node
-
-        prev_station.next = new_node
-        new_node.prev = prev_station
-        new_node.next = target
-        target.prev = new_node
-
-    elif cmd == 'CN':
-        delete_node = target.next
-        answer.append(str(delete_node.value))
-
-        next_node = delete_node.next
-        target.next = next_node
-        next_node.prev = target
-
-    elif cmd == 'CP':
-        delete_node = target.prev
-        answer.append(str(delete_node.value))
-
-        prev_station = delete_node.prev
-        prev_station.next = target
-        target.prev = prev_station
-
-print('\n'.join(answer))
