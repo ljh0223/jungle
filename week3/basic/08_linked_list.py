@@ -52,7 +52,6 @@ class LinkedList:
         """리스트의 모든 값 출력"""
         values = []
         
-        # TODO: head부터 시작
         current=self.head
         # TODO: 끝까지 순회하며 값 수집
         while current is not None:
