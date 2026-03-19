@@ -2,7 +2,6 @@
 # 문제 링크: https://www.acmicpc.net/problem/2470
 n=int(input())
 liquid=sorted(map(int,input().split()))
-mixed=[]
 def sol():
     left=0
     right=len(liquid)-1
