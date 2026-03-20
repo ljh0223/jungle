@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Week3 문제 채점 스크립트
+Week4 문제 채점 스크립트
 """
 
 import subprocess
@@ -8,7 +8,7 @@ import sys
 import difflib
 import os
 
-# Week3 문제 목록
+# Week4 문제 목록
 PROBLEMS = {
     "01_binary_tree": "이진 트리 순회",
     "02_bst": "이진 검색 트리",
@@ -83,7 +83,7 @@ def main():
         if sys.argv[1] == "--all":
             # 모든 문제 채점
             print("=" * 50)
-            print("Week3 전체 채점")
+            print("Week4 전체 채점")
             print("=" * 50)
             
             passed = 0
