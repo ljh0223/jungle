@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>그래프부터 위상정렬까지 학습노트</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm;
+    }
+
+    :root {
+      --ink: #1f2937;
+      --muted: #5b6472;
+      --line: #d6dde8;
+      --panel: #f7f9fc;
+      --accent: #0f766e;
+      --accent-soft: #e6fffb;
+      --title: #0b1320;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      color: var(--ink);
+      line-height: 1.65;
+      background: white;
+      font-size: 13px;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 10px;
+      color: var(--title);
+    }
+
+    h1 {
+      font-size: 25px;
+      line-height: 1.25;
+    }
+
+    h2 {
+      font-size: 18px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--line);
+      margin-top: 26px;
+    }
+
+    h3 {
+      font-size: 14px;
+      margin-top: 18px;
+    }
+
+    p {
+      margin: 0 0 10px;
+    }
+
+    ul {
+      margin: 8px 0 12px 18px;
+      padding: 0;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #eefbf7 0%, #eef4ff 100%);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px 22px 18px;
+      margin-bottom: 20px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin: 12px 0;
+    }
+
+    .point {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin: 12px 0;
+    }
+
+    .mono {
+      font-family: Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+      background: #0f172a;
+      color: #e5eefb;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.5;
+      margin: 10px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #d9fbf3;
+      color: #0f766e;
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-weight: 700;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #eef4ff;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="badge">Week 4 Learning Note</div>
+    <h1>그래프부터 위상정렬까지</h1>
+    <p class="subtitle">정의만 외우지 않고, 문제를 풀 때 바로 떠올릴 수 있게 정리한 재혁님용 복습 노트</p>
+  </section>
+
+  <section>
+    <h2>1. 그래프란 무엇인가</h2>
+    <p>그래프는 <strong>정점(vertex)</strong>과 <strong>간선(edge)</strong>으로 이루어진 연결 구조입니다. 트리가 계층 구조를 표현하는 데 강하다면, 그래프는 더 자유로운 관계를 표현하는 데 강합니다.</p>
+    <div class="box">
+      <strong>기본 용어</strong>
+      <ul>
+        <li><strong>vertex / node</strong>: 점, 대상 하나</li>
+        <li><strong>edge</strong>: 두 정점을 잇는 연결</li>
+        <li><strong>arc</strong>: 방향이 있는 간선이라고 생각하면 편함</li>
+        <li><strong>path</strong>: 한 정점에서 다른 정점으로 가는 경로</li>
+        <li><strong>cycle</strong>: 출발한 정점으로 다시 돌아오는 순환 경로</li>
+      </ul>
+    </div>
+    <div class="point">
+      트리도 그래프의 한 종류입니다. 다만 트리는 사이클이 없고, 연결 구조가 깔끔하게 정리된 특별한 그래프입니다.
+    </div>
+  </section>
+
+  <section>
+    <h2>2. 그래프에서 먼저 구분해야 할 것</h2>
+    <div class="grid">
+      <div class="box">
+        <h3>무방향 그래프</h3>
+        <p>연결만 있고 방향은 없습니다.</p>
+        <div class="mono">1 -- 2
+|    
+3</div>
+        <p class="small">친구 관계, 양방향 도로 같은 느낌</p>
+      </div>
+      <div class="box">
+        <h3>방향 그래프</h3>
+        <p>간선에 방향이 있습니다.</p>
+        <div class="mono">1 -> 2
+1 -> 3
+2 -> 4</div>
+        <p class="small">선수과목, 작업 순서 같은 느낌</p>
+      </div>
+    </div>
+    <div class="box">
+      <h3>가중치 그래프</h3>
+      <p>간선마다 거리, 비용, 시간 같은 숫자가 붙습니다. 이번 주 핵심은 BFS, DFS, 위상정렬이므로 가중치보다는 연결 구조와 탐색 방식에 먼저 익숙해지는 것이 중요합니다.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. 그래프 표현법</h2>
+    <p>초보 단계에서는 <strong>인접 리스트</strong>가 가장 중요합니다. BFS, DFS 문제에서 거의 기본처럼 쓰입니다.</p>
+    <div class="mono">graph = {
+    1: [2, 3],
+    2: [1, 4],
+    3: [1],
+    4: [2]
+}</div>
+    <ul>
+      <li><strong>graph[1] = [2, 3]</strong>은 1번 정점이 2, 3과 연결되었다는 뜻입니다.</li>
+      <li>무방향 그래프라면 <strong>a - b</strong>를 저장할 때 양쪽에 모두 추가해야 합니다.</li>
+      <li>방향 그래프라면 <strong>a -&gt; b</strong> 한쪽만 추가합니다.</li>
+    </ul>
+    <div class="point">
+      문제를 읽을 때 가장 먼저 볼 것: 정점 번호가 0부터 시작하는지, 1부터 시작하는지
+    </div>
+  </section>
+
+  <section>
+    <h2>4. BFS</h2>
+    <p><strong>BFS(Breadth-First Search)</strong>는 가까운 곳부터 차례대로 탐색하는 방식입니다. 한국어로는 <strong>너비 우선 탐색</strong>이라고 합니다.</p>
+    <div class="box">
+      <strong>핵심 감각</strong>
+      <ul>
+        <li>시작점에서 1칸 떨어진 정점들을 먼저 본다</li>
+        <li>그다음 2칸 떨어진 정점들을 본다</li>
+        <li>레벨 순서대로 탐색한다고 생각하면 이해가 쉽다</li>
+      </ul>
+    </div>
+    <div class="mono">A
+| \
+B  C
+|  |
+D  F</div>
+    <p>위 구조에서 A부터 BFS를 하면 보통 <strong>A -&gt; B -&gt; C -&gt; D -&gt; F</strong> 순서로 갑니다.</p>
+    <div class="point">
+      BFS는 보통 <strong>최단 거리</strong> 문제에서 강합니다. 가중치가 없을 때, 처음 도착한 거리가 가장 짧은 거리인 경우가 많기 때문입니다.
+    </div>
+    <ul>
+      <li>주로 <strong>큐(queue)</strong>를 사용합니다.</li>
+      <li>미로 탐색, 최소 이동 횟수, 단계별 전파 문제에서 자주 나옵니다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>5. DFS</h2>
+    <p><strong>DFS(Depth-First Search)</strong>는 한 방향으로 끝까지 깊게 들어갔다가, 더 못 가면 되돌아오는 탐색입니다. 한국어로는 <strong>깊이 우선 탐색</strong>이라고 합니다.</p>
+    <div class="box">
+      <strong>핵심 감각</strong>
+      <ul>
+        <li>갈 수 있을 때까지 한 방향으로 내려간다</li>
+        <li>막히면 돌아온다</li>
+        <li>트리의 재귀 순회와 느낌이 비슷하다</li>
+      </ul>
+    </div>
+    <p>DFS는 <strong>연결 요소 찾기, 경로 존재 여부 확인, 사이클 검사</strong> 같은 문제에서 매우 자주 쓰입니다.</p>
+    <ul>
+      <li>주로 <strong>재귀</strong> 또는 <strong>스택</strong>으로 구현합니다.</li>
+      <li>순서는 인접 리스트 순서에 따라 달라질 수 있습니다.</li>
+    </ul>
+    <div class="point">
+      BFS는 가까운 순서가 중요하고, DFS는 끝까지 파고드는 흐름이 중요합니다.
+    </div>
+  </section>
+
+  <section>
+    <h2>6. BFS와 DFS 비교</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>항목</th>
+          <th>BFS</th>
+          <th>DFS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>탐색 방식</td>
+          <td>가까운 곳부터 넓게</td>
+          <td>한 방향으로 깊게</td>
+        </tr>
+        <tr>
+          <td>주요 자료구조</td>
+          <td>큐</td>
+          <td>재귀 또는 스택</td>
+        </tr>
+        <tr>
+          <td>잘 맞는 문제</td>
+          <td>최단 거리, 레벨 탐색</td>
+          <td>경로 탐색, 연결 요소, 구조 확인</td>
+        </tr>
+        <tr>
+          <td>핵심 질문</td>
+          <td>가장 빨리 도착하려면?</td>
+          <td>연결되어 있는지 끝까지 따라가보자</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>7. 위상정렬</h2>
+    <p><strong>위상정렬(topological sort)</strong>은 순서가 정해져 있어야 하는 작업들을 앞뒤 관계를 지키며 나열하는 방법입니다.</p>
+    <div class="box">
+      <strong>예시</strong>
+      <ul>
+        <li>양말을 신은 뒤 신발을 신어야 함</li>
+        <li>선수과목 A를 수강한 뒤 과목 B를 들을 수 있음</li>
+        <li>프로젝트에서 공통 모듈을 만든 뒤 기능 구현을 시작해야 함</li>
+      </ul>
+    </div>
+    <div class="mono">A -> B
+A -> C
+B -> D
+C -> D</div>
+    <p>가능한 결과는 <strong>A, B, C, D</strong> 또는 <strong>A, C, B, D</strong>처럼 여러 개일 수 있습니다. 중요한 것은 선후관계를 깨지 않는 것입니다.</p>
+    <div class="point">
+      위상정렬은 <strong>사이클이 없는 방향 그래프</strong>에서만 가능합니다. 순환이 있으면 무엇을 먼저 해야 할지 결정할 수 없습니다.
+    </div>
+  </section>
+
+  <section>
+    <h2>8. 위상정렬에서 알아둘 개념</h2>
+    <div class="box">
+      <ul>
+        <li><strong>진입차수(indegree)</strong>: 어떤 정점으로 들어오는 간선 수</li>
+        <li><strong>진출차수(outdegree)</strong>: 어떤 정점에서 나가는 간선 수</li>
+      </ul>
+    </div>
+    <p>진입차수가 0이라는 것은, 그 정점을 시작하기 전에 먼저 해야 할 일이 없다는 뜻입니다. 그래서 위상정렬에서는 보통 <strong>진입차수가 0인 정점부터 처리</strong>합니다.</p>
+  </section>
+
+  <section>
+    <h2>9. 문제를 풀 때 체크할 것</h2>
+    <div class="box">
+      <ul>
+        <li>방향 그래프인지 무방향 그래프인지</li>
+        <li>정점 번호가 0부터인지 1부터인지</li>
+        <li>방문 체크가 필요한지</li>
+        <li>최단 거리 문제인지, 단순 연결 탐색 문제인지</li>
+        <li>선후관계 정리 문제인지</li>
+      </ul>
+    </div>
+    <p>이 다섯 가지만 먼저 구분해도 BFS, DFS, 위상정렬을 어느 방향으로 접근해야 할지 훨씬 빨리 보입니다.</p>
+  </section>
+
+  <section>
+    <h2>10. 재혁님용 한 줄 정리</h2>
+    <div class="box">
+      <ul>
+        <li><strong>그래프</strong>: 점과 선으로 연결 관계를 표현하는 구조</li>
+        <li><strong>BFS</strong>: 가까운 곳부터 차례대로 탐색</li>
+        <li><strong>DFS</strong>: 한 방향으로 깊게 들어갔다가 돌아오기</li>
+        <li><strong>위상정렬</strong>: 순서가 있는 작업들을 올바르게 나열하기</li>
+      </ul>
+    </div>
+    <p class="small">복습 순서 추천: 그래프 표현 - BFS - DFS - 위상정렬</p>
+  </section>
+</body>
+</html>
