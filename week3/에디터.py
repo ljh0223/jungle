@@ -43,11 +43,11 @@ for _ in range(m):
         left.next=new_node
         new_node.prev=left
 
-    result=[]
-    current=head.next
+result=[]
+current=head.next
 
-    while current!=tail:
-        result.append(current.value)
-        current=current.next
+while current!=tail:
+    result.append(current.value)
+    current=current.next
 
-    print("".join(result))
+print("".join(result))

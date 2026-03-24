@@ -1,13 +1,14 @@
-nums=list(map(int,input().split()))
-a=nums[0]
-b=nums[1]
-c=nums[2]
+x,y,z=map(int,input().split())
 
-def pow(x,y,z):
-    return (x**y)%z
+def pow(a,b,c):
+    if b==1:
+        return a%c
 
-def half(x,y,z):
-    if y%2 != 0:
-        y=1+(y//2)**2
+    half=pow(a,b//2,c)
+
+    if b%2==0:
+        return(half*half)%c
     else:
-        y=P
+        return(a*half*half)%c
+    
+print((pow(x,y,z)))
