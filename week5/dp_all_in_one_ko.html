@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DP 모든 것 정리</title>
+  <style>
+    :root {
+      --bg: #f6f2e9;
+      --paper: #fffdfa;
+      --ink: #22201b;
+      --muted: #6b655c;
+      --accent: #1f6058;
+      --soft: #edf5f3;
+      --tip: #fff3d8;
+      --line: #ddd3c4;
+      --code-bg: #f4efe7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      background:
+        radial-gradient(circle at top left, #efe0b7 0, transparent 24%),
+        radial-gradient(circle at top right, #d8ebe6 0, transparent 24%),
+        linear-gradient(180deg, #f7efe4 0%, var(--bg) 100%);
+      color: var(--ink);
+      line-height: 1.72;
+    }
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 34px 24px 60px;
+    }
+    .card {
+      background: var(--paper);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 16px 48px rgba(34, 32, 27, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    h1, h2, h3 {
+      margin: 0 0 12px;
+      line-height: 1.3;
+    }
+    h1 {
+      font-size: 34px;
+      letter-spacing: -0.02em;
+    }
+    h2 {
+      margin-top: 34px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--line);
+      font-size: 25px;
+      color: var(--accent);
+    }
+    h3 {
+      margin-top: 22px;
+      font-size: 19px;
+    }
+    p { margin: 10px 0 0; }
+    ul, ol { margin: 10px 0 0 22px; }
+    li { margin: 7px 0; }
+    .badge {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #efe4cf;
+      color: #5a4b33;
+      font-size: 14px;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .box, .tip {
+      margin-top: 16px;
+      padding: 15px 18px;
+      border-radius: 14px;
+      border: 1px solid #d8e5e0;
+      background: var(--soft);
+    }
+    .tip {
+      background: var(--tip);
+      border-color: #e8d59f;
+    }
+    pre {
+      margin: 14px 0 0;
+      padding: 14px 16px;
+      background: var(--code-bg);
+      border: 1px solid #e2d8c8;
+      border-radius: 14px;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.58;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      background: #f2ece0;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #f6f1e5; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 14px;
+    }
+    @media print {
+      @page {
+        size: A4;
+        margin: 11mm 11mm 14mm;
+      }
+      body { background: white; }
+      .page {
+        padding: 0;
+        max-width: none;
+      }
+      .card {
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+      }
+      h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+      pre, table, .box, .tip, .grid { break-inside: avoid; page-break-inside: avoid; }
+      p, li, th, td { font-size: 13px; line-height: 1.56; }
+      h1 { font-size: 29px; }
+      h2 { font-size: 21px; margin-top: 18px; }
+      h3 { font-size: 16px; margin-top: 14px; }
+      pre { font-size: 11px; line-height: 1.45; padding: 10px 12px; }
+      th, td { padding: 6px 8px; }
+      .box, .tip { padding: 10px 12px; }
+    }
+    @media (max-width: 760px) {
+      .page { padding: 16px 12px 28px; }
+      .card { padding: 24px 18px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <div class="badge">알고리즘 학습용 정리</div>
+      <h1>DP 모든 것 정리</h1>
+      <p class="lead">
+        동적 계획법(DP, Dynamic Programming)을 처음 배우는 기준으로 한 번에 볼 수 있게 정리한 문서입니다.
+        개념, 푸는 순서, 대표 유형, 자주 하는 실수, 예제 코드까지 담았습니다.
+      </p>
+
+      <h2>1. DP를 한 줄로 말하면</h2>
+      <p>
+        DP는 <strong>큰 문제를 작은 문제로 나누고</strong>, 그 작은 문제의 답을
+        <strong>저장해 두면서 재사용하는 방법</strong>입니다.
+      </p>
+      <div class="box">
+        핵심 감각: <strong>같은 계산을 여러 번 하지 않게 만드는 것</strong>
+      </div>
+
+      <h2>2. 왜 DP가 필요한가</h2>
+      <ul>
+        <li>재귀만 쓰면 같은 문제를 반복해서 계산하는 경우가 많습니다.</li>
+        <li>한 번 구한 답을 저장해 두면 속도를 크게 줄일 수 있습니다.</li>
+        <li>특히 최댓값, 최솟값, 경우의 수 문제에 자주 나옵니다.</li>
+      </ul>
+
+      <h2>3. DP가 성립하는 조건</h2>
+      <h3>3-1. 최적 부분 구조</h3>
+      <p>큰 문제의 답이 작은 문제의 답들로부터 만들어질 수 있어야 합니다.</p>
+      <h3>3-2. 중복되는 부분 문제</h3>
+      <p>같은 작은 문제를 여러 번 다시 계산하는 구조여야 합니다.</p>
+
+      <h2>4. 가장 쉬운 예시: 피보나치</h2>
+      <pre><code class="language-python">def fib(n):
+    if n &lt;= 1:
+        return n
+    return fib(n-1) + fib(n-2)</code></pre>
+      <p>
+        이 코드는 <code>fib(2)</code>, <code>fib(3)</code> 같은 값을 여러 번 다시 계산합니다.
+        DP는 이런 낭비를 막습니다.
+      </p>
+      <pre><code class="language-python">def fib(n):
+    if n &lt;= 1:
+        return n
+
+    dp = [0] * (n + 1)
+    dp[1] = 1
+
+    for i in range(2, n + 1):
+        dp[i] = dp[i-1] + dp[i-2]
+
+    return dp[n]</code></pre>
+
+      <h2>5. DP 구현 방식 두 가지</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>방식</th>
+            <th>설명</th>
+            <th>장점</th>
+            <th>단점</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Top-Down</td>
+            <td>재귀로 내려가며 필요할 때 계산하고 저장</td>
+            <td>점화식을 그대로 쓰기 쉬움</td>
+            <td>재귀 깊이, 함수 호출 오버헤드</td>
+          </tr>
+          <tr>
+            <td>Bottom-Up</td>
+            <td>작은 문제부터 반복문으로 차례대로 계산</td>
+            <td>안정적이고 실행 흐름이 명확함</td>
+            <td>처음엔 채우는 순서가 덜 직관적일 수 있음</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>5-1. 메모이제이션</h3>
+      <p>Top-Down에서 계산한 값을 저장하는 방식입니다.</p>
+      <h3>5-2. 타뷸레이션</h3>
+      <p>Bottom-Up에서 표를 채우면서 계산하는 방식입니다.</p>
+
+      <h2>6. DP 문제를 푸는 표준 순서</h2>
+      <ol>
+        <li><strong>dp 정의</strong>: <code>dp[i]</code>가 무엇을 뜻하는지 정합니다.</li>
+        <li><strong>점화식</strong>: 현재 상태를 어떤 이전 상태로부터 만들지 정합니다.</li>
+        <li><strong>초기값</strong>: 시작 상태를 정합니다.</li>
+        <li><strong>계산 순서</strong>: 어떤 순서로 값을 채워야 하는지 정합니다.</li>
+      </ol>
+      <div class="tip">
+        DP는 구현보다 먼저 <strong>dp 정의</strong>가 제일 중요합니다.
+      </div>
+
+      <h2>7. dp 정의가 왜 중요한가</h2>
+      <p>DP 문제의 절반 이상은 <code>dp[i]</code>를 정확히 정하는 데서 갈립니다.</p>
+      <ul>
+        <li><code>dp[i] = i번째 계단에 도착하는 방법 수</code></li>
+        <li><code>dp[i] = i를 1로 만드는 최소 연산 횟수</code></li>
+        <li><code>dp[i][j] = i번째 물건까지 고려했을 때 무게 j 이하의 최대 가치</code></li>
+      </ul>
+
+      <h2>8. 대표 예제 1: 계단 오르기</h2>
+      <p>한 번에 1칸 또는 2칸 올라갈 수 있을 때, n칸에 도착하는 방법 수를 구합니다.</p>
+      <h3>정의</h3>
+      <p><code>dp[i] = i칸에 도착하는 방법 수</code></p>
+      <h3>점화식</h3>
+      <p><code>dp[i] = dp[i-1] + dp[i-2]</code></p>
+      <h3>초기값</h3>
+      <p><code>dp[1] = 1</code>, <code>dp[2] = 2</code></p>
+      <pre><code class="language-python">def stairs(n):
+    if n == 1:
+        return 1
+
+    dp = [0] * (n + 1)
+    dp[1] = 1
+    dp[2] = 2
+
+    for i in range(3, n + 1):
+        dp[i] = dp[i-1] + dp[i-2]
+
+    return dp[n]</code></pre>
+
+      <h2>9. 대표 예제 2: 1로 만들기</h2>
+      <p>
+        정수 <code>x</code>가 있을 때 <code>-1</code>, <code>/2</code>, <code>/3</code> 연산으로
+        1을 만드는 최소 횟수를 구합니다.
+      </p>
+      <p><code>dp[i] = i를 1로 만드는 최소 연산 횟수</code></p>
+      <pre><code class="language-python">def make_one(x):
+    dp = [0] * (x + 1)
+
+    for i in range(2, x + 1):
+        dp[i] = dp[i - 1] + 1
+
+        if i % 2 == 0:
+            dp[i] = min(dp[i], dp[i // 2] + 1)
+        if i % 3 == 0:
+            dp[i] = min(dp[i], dp[i // 3] + 1)
+
+    return dp[x]</code></pre>
+
+      <h2>10. 대표 예제 3: 배낭 문제</h2>
+      <p>
+        각 물건에 무게와 가치가 있을 때, 제한 무게를 넘지 않으면서 가치 합을 최대로 만드는 문제입니다.
+      </p>
+      <p><code>dp[i][w] = i번째 물건까지 고려했을 때, 무게 w 이하의 최대 가치</code></p>
+      <p>핵심은 항상 두 가지 선택입니다.</p>
+      <ul>
+        <li>현재 물건을 담지 않는다</li>
+        <li>현재 물건을 담는다</li>
+      </ul>
+
+      <h2>11. 대표적인 DP 유형</h2>
+      <div class="grid">
+        <div class="box">
+          <strong>경우의 수 DP</strong>
+          <p>몇 가지 방법이 있는지 세는 문제</p>
+        </div>
+        <div class="box">
+          <strong>최솟값/최댓값 DP</strong>
+          <p>최소 비용, 최대 점수, 최대 가치</p>
+        </div>
+        <div class="box">
+          <strong>문자열 DP</strong>
+          <p>LCS, 편집 거리 같은 문자열 문제</p>
+        </div>
+        <div class="box">
+          <strong>배낭형 DP</strong>
+          <p>선택/비선택 구조가 있는 누적 최적화 문제</p>
+        </div>
+        <div class="box">
+          <strong>구간 DP</strong>
+          <p><code>dp[i][j]</code>처럼 구간 단위로 푸는 문제</p>
+        </div>
+        <div class="box">
+          <strong>트리/비트마스크 DP</strong>
+          <p>상태 관리가 더 복잡한 확장형 문제</p>
+        </div>
+      </div>
+
+      <h2>12. 1차원 DP와 2차원 DP</h2>
+      <h3>1차원 DP</h3>
+      <p><code>dp[i]</code> 형태로 표현합니다. 계단 오르기, 피보나치 같은 문제에서 자주 씁니다.</p>
+      <h3>2차원 DP</h3>
+      <p><code>dp[i][j]</code> 형태로 표현합니다. 배낭, LCS처럼 상태가 2개 필요할 때 자주 씁니다.</p>
+
+      <h2>13. DP와 다른 기법 비교</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>기법</th>
+            <th>핵심</th>
+            <th>DP와 차이</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>분할정복</td>
+            <td>문제를 쪼개서 각각 푼 뒤 합침</td>
+            <td>작은 문제들이 보통 서로 안 겹침</td>
+          </tr>
+          <tr>
+            <td>그리디</td>
+            <td>지금 당장 최선으로 보이는 선택</td>
+            <td>미래 전체 최적을 항상 보장하지 않음</td>
+          </tr>
+          <tr>
+            <td>DP</td>
+            <td>작은 문제 답을 저장하고 재사용</td>
+            <td>중복 부분 문제와 점화식이 중요</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>14. DP에서 자주 하는 실수</h2>
+      <ul>
+        <li><code>dp[i]</code> 정의가 애매함</li>
+        <li>점화식을 틀리게 세움</li>
+        <li>초기값을 빼먹음</li>
+        <li>인덱스를 헷갈림</li>
+        <li>계산 순서를 잘못 정함</li>
+        <li>정답 위치를 틀리게 출력함</li>
+        <li>메모리를 너무 크게 잡음</li>
+      </ul>
+
+      <h2>15. 공간 최적화</h2>
+      <p>
+        어떤 문제는 전체 배열이 필요 없고 바로 이전 몇 개 상태만 필요합니다.
+        이때는 배열 대신 변수만 써서 메모리를 줄일 수 있습니다.
+      </p>
+      <pre><code class="language-python">def fib(n):
+    if n &lt;= 1:
+        return n
+
+    a, b = 0, 1
+    for _ in range(2, n + 1):
+        a, b = b, a + b
+    return b</code></pre>
+
+      <h2>16. DP 문제를 보면 먼저 할 질문</h2>
+      <ol>
+        <li>최솟값, 최댓값, 경우의 수 중 무엇을 구하는가?</li>
+        <li>현재 상태를 무엇으로 표현할까?</li>
+        <li>이전 어떤 상태에서 현재 상태로 올 수 있나?</li>
+        <li>중복 계산이 생기나?</li>
+        <li>배열 차원은 몇 개인가?</li>
+      </ol>
+
+      <h2>17. 입문 연습 순서 추천</h2>
+      <ol>
+        <li>피보나치</li>
+        <li>계단 오르기</li>
+        <li>1로 만들기</li>
+        <li>동전 문제</li>
+        <li>배낭 문제</li>
+        <li>LIS</li>
+        <li>LCS</li>
+      </ol>
+      <div class="tip">
+        DP는 처음부터 어려운 문제를 붙잡기보다, <strong>쉬운 점화식 문제로 감각을 먼저 만들고</strong> 올라가는 게 좋습니다.
+      </div>
+
+      <h2>18. DP 풀이 템플릿</h2>
+      <pre><code class="language-python"># 1. dp 정의
+# dp[i] = ...
+
+# 2. 초기값
+dp[0] = ...
+dp[1] = ...
+
+# 3. 점화식
+for i in range(...):
+    dp[i] = ...
+
+# 4. 정답 출력
+print(dp[...])</code></pre>
+
+      <h2>19. 재혁님 기준 핵심 압축</h2>
+      <ul>
+        <li>DP는 큰 문제를 작은 문제로 나누고, 작은 문제 답을 저장해 재사용하는 방법입니다.</li>
+        <li>핵심은 <strong>dp 정의</strong>, <strong>점화식</strong>, <strong>초기값</strong>, <strong>계산 순서</strong>입니다.</li>
+        <li>DP가 어려운 이유는 구현보다 <strong>상태 정의</strong>가 어렵기 때문입니다.</li>
+        <li>문제를 보면 먼저 “작은 문제는 뭘까?”를 생각하는 습관이 중요합니다.</li>
+      </ul>
+
+      <h2>20. 마지막 한 줄 정리</h2>
+      <div class="box">
+        DP는 <strong>작은 문제의 답을 저장해서 큰 문제를 빠르게 푸는 방법</strong>입니다.
+      </div>
+    </section>
+  </main>
+</body>
+</html>

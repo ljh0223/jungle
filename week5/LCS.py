@@ -1,5 +1,3 @@
-# DP - LCS (백준 골드5)
-# 문제 링크: https://www.acmicpc.net/problem/9251
 A=input()
 B=input()
 a,b=len(A),len(B)
