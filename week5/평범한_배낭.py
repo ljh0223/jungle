@@ -1,5 +1,3 @@
-# DP - 평범한 배낭 (백준 골드5)
-# 문제 링크: https://www.acmicpc.net/problem/12865
 n,k=map(int,input().split())
 
 items=[list(map(int,input().split())) for _ in range(n)]
