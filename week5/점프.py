@@ -1,5 +1,3 @@
-# DP - 점프 (백준 골드4)
-# 문제 링크: https://www.acmicpc.net/problem/2253
 n,m=map(int,input().split())
 
 stones=sorted(int(input()) for _ in range(m))
@@ -17,7 +15,7 @@ stones=sorted(int(input()) for _ in range(m))
 #         count+=1
 #         recursion(next,jump,count)
 
-# print(recursion(1,1,0))
+# print(recursion(1,1,0)) 실패
 
 dp=[[11111]*(n+1) for _ in range(n+1)]
 dp[1][0]=0
