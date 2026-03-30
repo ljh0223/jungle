@@ -1,11 +1,7 @@
-# 그리디 - 신입 사원 (백준 실버1)
-# 문제 링크: https://www.acmicpc.net/problem/1946
-import sys
-input = sys.stdin.readline
-
 t=int(input())
 for _ in range(t):
     n=int(input())
+    result=[]
     scores=[tuple(map(int,input().split())) for _ in range(n)]
 
     scores.sort()

@@ -1,20 +1,21 @@
 # 그리디 - 회의실 배정 (백준 골드5)
 # 문제 링크: https://www.acmicpc.net/problem/1931
 import sys
-input = sys.stdin.readline
+input=sys.stdin.readline
 
-t=int(input())
-for _ in range(t):
-    n=int(input())
-    result=[]
-    scores=[tuple(map(int,input().split())) for _ in range(n)]
+n=int(input())
+meetings=[tuple(map(int,input().split())) for _ in range(n)]
+new_m=[]
+for x,y in meetings:
+    new_m.append((y,x))
+new_m.sort()
 
-    scores.sort()
-    current=scores[0][1]
-    count=1
-    
-    for score in scores[1:]:
-        if score[1]<current:
-            current=score[1]
-            count+=1
-    print(count)
+current=new_m[0][0]
+count=1
+
+for meeting in new_m[1:]:
+    if meeting[1]>=current:
+        current=meeting[0]
+        count+=1
+
+print(count)
