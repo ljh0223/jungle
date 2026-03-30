@@ -6,7 +6,10 @@ count=0
 for coin in coins:
     if coin>k:
         continue
-    else:
+    elif coin<k:
         count+=k//coin
         k%=coin
+    else:
+        count+=k//coin
+        break
 print(count)
